@@ -1,4 +1,27 @@
 # AWS ECS Deep Dive Section 3
+
+# For AWS Linux
+1. Install docker and give the proper access
+2. Install git
+```bash
+$ sudo yum update -y
+$ sudo amazon-linux-extras install docker -y
+$ sudo service docker start
+$ sudo usermod -a -G docker ec2-user
+$ sudo yum install git -y
+```
+3. Setup CodeCommit with aws configure and git
+```bash
+$ aws configure
+AWS Access Key ID [None]: Type your target AWS access key ID here, and then press Enter
+AWS Secret Access Key [None]: Type your target AWS secret access key here, and then press Enter
+Default region name [None]: Type a supported region for CodeCommit here, and then press Enter
+Default output format [None]: Type json here, and then press Enter
+$ git config --global credential.helper '!aws codecommit credential-helper $@'
+$ git config --global credential.UseHttpPath true
+$ git clone https://git-codecommit.us-east-2.amazonaws.com/v1/repos/MyDemoRepo my-demo-repo
+```
+
 #### Host 2 tier application using docker
 
 * Pull the mysql image
